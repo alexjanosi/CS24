@@ -1,0 +1,10 @@
+Although all the numbers are matched with the correct result, the obvious
+problem is that the program only outputs results from producer 0. This
+shows that cooperative thread execution is not fair, since producer 0 is
+outputting everything instead of both producers. Producer 0 fills the buffer
+first since it is first to enter its while loop. Then, producer 0 yields
+once the buffer is filled. However, since the buffer is filled, producer 1
+is also forced to yield. Afterwards, the consumer runs, which frees some
+values in the buffer. Since producer 0 yielded first, it then runs again
+until the buffer is full again. This is unfair since producer 1 is never
+allowed to stop yielding and does not output anything.

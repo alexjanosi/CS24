@@ -1,0 +1,37 @@
+Max value CPUID accepts:  22 (0x16)
+Max value CPUID accepts for extended information:  2147483656 (0x80000008)
+
+Vendor string:  "GenuineIntel"
+Processor family ID:  6    Model:  14    Stepping ID:  10
+Brand index:  0    (unsupported)
+
+Processor brand string:  Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+
+Instruction cache block size:  8 dwords (64 bytes)
+
+Number of cores in the package:  1
+Max addressable IDs for logical processors in the package:  16
+APIC:  yes
+x2APIC:  yes
+Initial APIC ID:  0
+Package supports multiple threads:  yes
+
+Cache index 0:  type 1 (data cache), level 1, procIDs 2, totIDs 8
+    Block size 64B, partitions 1, associativity 8, sets 64
+    Cache size:  32768 bytes
+Cache index 1:  type 2 (instruction cache), level 1, procIDs 2, totIDs 8
+    Block size 64B, partitions 1, associativity 8, sets 64
+    Cache size:  32768 bytes
+Cache index 2:  type 3 (unified cache), level 2, procIDs 2, totIDs 8
+    Block size 64B, partitions 1, associativity 4, sets 1024
+    Cache size:  262144 bytes
+Cache index 3:  type 3 (unified cache), level 3, procIDs 16, totIDs 8
+    Block size 64B, partitions 1, associativity 12, sets 12288
+    Cache size:  9437184 bytes
+
+Apple LLVM version 10.0.1 (clang-1001.0.46.4)
+Target: x86_64-apple-darwin18.5.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+
+Darwin Alexs-MacBook-Pro.local 18.5.0 Darwin Kernel Version 18.5.0: Mon Mar 11 20:40:32 PDT 2019; root:xnu-4903.251.3~3/RELEASE_X86_64 x86_64
