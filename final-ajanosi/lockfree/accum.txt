@@ -1,0 +1,9 @@
+2.4
+===
+This implementation is lock-free. There are certain situations where a certain
+thread could run forever in the while loop implemented. For example, if other
+threads were being updated constantly, we would always be in a situation where
+we use compare_and_swap correctly. This would cause our while loop to run over
+and over again. Since the threads are being changed as the comparison is 
+happening, we could never have a successful operation, and the thread could
+take an unbounded amount of time.

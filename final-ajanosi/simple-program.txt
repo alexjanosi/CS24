@@ -1,0 +1,40 @@
+4.1
+===
+When the command is typed in, the process gets started by loading instructions
+into the instruction memory, loading initial data into the data memory, and
+starting the program counter at zero. The operating system uses the loader
+to store this information and transfer the control to the program.
+
+4.2
+===
+When the process starts to occur, the system must make sure it has registers
+set up that store any possible inputs or variables. The loader jumps to the
+program's entry point. The _start function calls the system startup function
+which initializes the execution environment and calls the user-level main
+function. Afterwards, it handles the return value and returns control to the
+kernel when needed.
+
+4.3
+===
+The program will start at the top and go line by line through the code. It will
+update the registers as the new variable is allocated. Then, it will perform
+operations and make sure the return value from each operation is correct. After
+each process, the counter is updated to show we are progressing. Once
+it reaches the expectional behavior, it will try to perform an operation that
+gives an unexpected response, which triggers the system's response.
+
+4.4
+===
+The exceptional behavior is identifying and dealing with the deference of NULL.
+The print statement tries to print a value that does not exist, which causes a
+segfault. The processor detects that the event has occurred and determines the
+corresponding exception number. Using the exception table to use the 
+appropriate handler. In this case, the program then aborts, which 
+terminates the process.
+
+4.5
+===
+As mentioned above, the loader gets the return value from main function, which
+determines how to react. Whether this is from exception handling or the process
+terminated as expected, the loader handles it accordingly. Once this is done,
+the loader terminates the process, which leaves us back at the shell.

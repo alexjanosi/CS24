@@ -1,0 +1,69 @@
+1.2
+===
+The Quicksort sorting algorithm relies heavily on the movement of data, so the
+most obvious explanation for the poor performance of the records is that we are
+moving a significantly larger amount of data each time (128B vs 16B or 8B). The
+same argument can be given for the record-pointer approach being better than
+the record-info, but we have to consider other aspects. The caches are being
+utilized in similar for the rec-info and rec-pointer methods, while the L1
+cache cannot be used for the records methods (too big). The data in the other
+methods is stored in the local (L1) cache for easy access. Quicksort sorts 
+data that is close together, so the spatial locality is similar between 
+the methods. Also, the temporal locality is similar as the same data 
+will be accessed multiple times to be sorted depending on the pivot. 
+The biggest factor is whether the time to look up a pointer's value is quicker
+than having to move around the prefix. The answer is that it is. 
+Although, it takes time to access the pointer, move to the value it 
+is pointing to, and read the value, this is a lot quicker than having 
+to continuously move around the extra prefix, since data movement is 
+extremely expensive and look up is on the local cache (so very quick as 
+compared to other memory). Also, we are using small total
+collection sizes, which makes local storage easier. Therefore, the pointer 
+method is quicker than the record-info approach because the abstraction 
+for sorting the records results in a relatively faster operation, given the
+smaller set of data.
+
+1.3
+===
+We would expect this large change to happen when the pointers fill up the local
+or L1 cache. We know that the L1 cahce is 32000B and each pointer is 8B. If we
+divide this, we would expect the breaking point to be arround 4000 elements.
+However, if we consider the case where we have pointers and the memory, so
+106B, we have around 302 elements. The average of this comes out to around
+2150 elements, which seems to be where the graph changes from a log function
+to a more linear function. Next, I would estimate that L is around 50000
+elements, since this is when the graph starts to level out to its smaller
+increasing stage. We would see this change because this is where we are 
+accessing different caches levels, which is expensive. After L, we see the
+graph remain smooth, since the locality of the memory will all be in the
+lower cache levels.
+
+1.4
+===
+This process will remain fair consistent based on the the storage of the items
+being sorted and the process of the sorting. Once we hit around 20000 elements,
+we need a storage of 16 x 20000 = 320000B, which takes us into the L3 data
+cache. Therefore, we have no major changes in the look up time beyond this
+point. The sorting method stays relatively consistent as well, since we are 
+just looking at the prefixes. So, increasing the total collection size will not
+have a large impact on the average clocks per element.
+
+1.5
+===
+At this large data size, we have reached the point where we enter the more time
+consuming levels of caches. The record-pointer method is now very slow as the
+points and memory will be located in different levels of memory, which is
+inefficient for lookup time and spatial locality. The record-info method is
+now the best because it's spacial and temporal locality will be relatively
+better than the record-pointer method, and it will be transferring around
+less data than the record method. Therefore, spatial locality plays a large
+role and the transfer of data still causes the record method to be inefficient.
+
+1.6
+===
+Some possible explanations could be the generated data. Quicksort has different
+behaviors based on the cases it is given. This trial could have had a wide
+variety of best case and worst case scenerios, which have different time
+complexities. Another explanation could be having other processes running at
+the same time as this process. This would greatly impact the average clocks
+from similar total collection sizes.

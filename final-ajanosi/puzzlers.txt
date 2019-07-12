@@ -1,0 +1,62 @@
+3.1
+===
+The value of counter would be printed ten times. When the first instance of
+fork is called in the for loop, both the parent and child processes have
+counter set as zero. Therefore, each update the counter and print their
+value, so we have printed twice so far. We enter the loop again, where two
+more processes are created, which then updates and prints the counter in
+the loop. Lastly, the all four processes print before returning. Therefore,
+we have 2 + 4 + 4 = 10.
+
+3.2
+===
+The value of counter printed on the first line will be one. As stated above,
+the counter is started at zero for both the parent and the child. Each will
+increment once in their own process, which will then print one. It does not
+matter which process goes first, as both start with one. These processes
+happen before the next fork call, so this will not print beforehand.
+
+3.3
+===
+The value of counter printed on the last line will be two. Continuing what
+was said above, we will end with four processes. Two of them will have
+started with counter = 0 and two with counter = 1 (after the first loop).
+In the first case, the loop has two iterations, which updates counter to
+two. In the second case, the situation given is when i = 1. Therefore,
+the counter is incremented only once. All cases end with counter = 2, so
+the last line will print two.
+
+3.4
+===
+The output of the program will be printing "1, 3, 3" and will always be
+the same every time. When the program starts, handler1 is called which 
+increments the counter and prints the one from the parent. Then, kill is
+called. Then, fork is called, which creates a child and parent process.
+Because of this, the if statement in the main function faces two processes.
+The child process will make the if statement true, which causes the child to
+enter handler2. However, since kill was called on the parent pid, the counter
+is initially set to zero for the child. Following the process, handler2
+adds three to the initial counter (zero), and prints (the first 3).
+This then exits. The parent process will enter the else statement in the
+main function which waits for the child to terminate before adding two
+and printing (the last 3). Because of the kill call in handler1, we always
+enter a situation like this where the child enters handler2 and the
+parent waits with the same values outputted. Since handler1 is called
+first, the one will always be printed first. Then, the child three will
+be printed next since the parent is waiting.
+
+3.5
+===
+All outputs would be possible except for the first one. I say this because
+the string must start with a zero, the one must come before the two, and the
+three must come before the four. The function starts with the simple print
+of the zero at the top. Then, fork is called, which creates a parent and
+child process. The child will add one to val (2 + 1 = 3) and print in the
+if statement. Then, it will add one to val (3 + 1 = 4) and print outside of
+the if statements. Similarly, the parent will enter the else part which minuses
+one (2 - 1 = 1) and prints. It then adds one (1 + 1 = 2) and prints. Since
+the parent and child processes execute at the same time, the order of the
+"1234" string has many different permutations. The only rules are that the
+zero must be first and values in the same process must be in the right order.
+Since the "4" comes before the "3" in the first option, this cannot be
+generated.
